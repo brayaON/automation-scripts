@@ -1,0 +1,20 @@
+#!/bin/bash
+
+RG_NAME="rg-static-blog"
+APP_NAME="app-personal-blog"
+GH_USER="brayaON"
+location="eastus2"
+
+az group create \
+    --name $RG_NAME \
+    --location $location
+
+az staticwebapp create \
+    --name $APP_NAME \
+    --resource-group $RG_NAME \
+    --source https://github.com/$GH_USER/personal-blog \
+    --location $location \
+    --branch main \
+    --app-location "/" \
+    --output-location "public" \
+    --login-with-github

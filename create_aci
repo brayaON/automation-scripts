@@ -1,0 +1,20 @@
+#!/bin/bash
+
+RG_NAME=rg-aci-test
+location=eastus
+ACI_NAME=aci-go-test
+img_name="mcr.microsoft.com/oss/nginx/nginx:1.9.15-alpine"
+
+az group create \
+    --resource-group $RG_NAME \
+    --location $location
+
+az container create \
+    --resource-group $RG_NAME \
+    --name $ACI_NAME \
+    --image $img_name \
+    --dns-name "$ACI_NAME-url" \
+    --ports 80
+
+export $RG_NAME
+export $ACI_NAME

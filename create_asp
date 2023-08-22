@@ -1,0 +1,27 @@
+#!/bin/bash
+
+RG_NAME="rg-asp-test"
+ASP_NAME="asp-test"
+APP_NAME="app-hello-world"
+location="eastus"
+
+az group create \
+    --resource-group $RG_NAME \
+    --location $location
+
+az appservice plan create \
+    --is-linux \
+    --resource-group $RG_NAME \
+    --name $ASP_NAME \
+    --location $location \
+    --sku B1
+
+az webapp create \
+    --resource-group $RG_NAME \
+    --name $APP_NAME \
+    --plan $ASP_NAME \
+    --runtime "GO:1.19"
+
+export RG_NAME
+export ASP_NAME
+export APP_NAME

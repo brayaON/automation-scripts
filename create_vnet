@@ -1,0 +1,33 @@
+#!/bin/bash
+
+RG_NAME="rg-vnet-test-$RANDOM"
+VNET_NAME="vnet-personal-$RANDOM"
+SB_NAME="sb-test-01"
+NSG_NAME="nsg-test"
+
+location="eastus2"
+
+az group create \
+    --resource-group $RG_NAME \
+    --location $location
+
+az network vnet create \
+    --name $VNET_NAME \
+    --resource-group $RG_NAME \
+    --address-prefix 10.0.0.0/16
+
+az network nsg create \
+    --name $NSG_NAME \
+    --resource-group $RG_NAME
+
+az network vnet subnet create \
+    --name $SB_NAME \
+    --address-prefixes 10.0.1.0/24 \
+    --vnet-name $VNET_NAME \
+    --resource-group $RG_NAME \
+    --network-security-group $NSG_NAME 
+
+export VNET_NAME
+export SB_NAME
+export RG_NAME
+export NSG_NAME

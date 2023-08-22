@@ -1,0 +1,19 @@
+#!/bin/bash
+
+RG_NAME="rg-acr-test"
+ACR_NAME="acrtest$RANDOM"
+location="eastus2"
+sku="Basic"
+
+az group create \
+    --resource-group $RG_NAME \
+    --location $location
+
+az acr create \
+    --resource-group $RG_NAME \
+    --name $ACR_NAME \
+    --sku $sku \
+    --admin-enabled true
+
+export RG_NAME
+export ACR_NAME

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+RG_NAME="rg-test"
+location="eastus2"
+
+az group create \
+    --resource-group $RG_NAME \
+    --location $location
+
+export $RG_NAME
