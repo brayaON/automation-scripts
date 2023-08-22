@@ -1,8 +1,8 @@
 #!/bin/bash
 
-RG_NAME="rg-static-blog"
-APP_NAME="app-personal-blog"
-GH_USER="brayaON"
+export RG_NAME="rg-static-blog"
+export APP_NAME="app-personal-blog"
+export GH_USER="brayaON"
 location="eastus2"
 
 az group create \

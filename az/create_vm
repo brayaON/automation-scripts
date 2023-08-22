@@ -1,13 +1,9 @@
 #!/bin/bash
 
-RG_NAME="rg-vm-tst"
-VM_NAME="vm-test"
+export RG_NAME="rg-vm-tst"
+export VM_NAME="vm-test"
 location="eastus2"
 
 az group create \
     --resource-group $RG_NAME \
     --location $location
-
-
-export RG_NAME
-export VM_NAME

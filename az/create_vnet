@@ -1,9 +1,9 @@
 #!/bin/bash
 
-RG_NAME="rg-vnet-test-$RANDOM"
-VNET_NAME="vnet-personal-$RANDOM"
-SB_NAME="sb-test-01"
-NSG_NAME="nsg-test"
+export RG_NAME="rg-vnet-test-$RANDOM"
+export VNET_NAME="vnet-personal-$RANDOM"
+export SB_NAME="sb-test-01"
+export NSG_NAME="nsg-test"
 
 location="eastus2"
 
@@ -26,8 +26,3 @@ az network vnet subnet create \
     --vnet-name $VNET_NAME \
     --resource-group $RG_NAME \
     --network-security-group $NSG_NAME 
-
-export VNET_NAME
-export SB_NAME
-export RG_NAME
-export NSG_NAME

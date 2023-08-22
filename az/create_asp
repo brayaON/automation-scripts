@@ -1,8 +1,8 @@
 #!/bin/bash
 
-RG_NAME="rg-asp-test"
-ASP_NAME="asp-test"
-APP_NAME="app-hello-world"
+export RG_NAME="rg-asp-test"
+export ASP_NAME="asp-test"
+export APP_NAME="app-hello-world"
 location="eastus"
 
 az group create \
@@ -21,7 +21,3 @@ az webapp create \
     --name $APP_NAME \
     --plan $ASP_NAME \
     --runtime "GO:1.19"
-
-export RG_NAME
-export ASP_NAME
-export APP_NAME

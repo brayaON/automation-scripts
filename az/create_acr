@@ -1,7 +1,7 @@
 #!/bin/bash
 
-RG_NAME="rg-acr-test"
-ACR_NAME="acrtest$RANDOM"
+export RG_NAME="rg-acr-test"
+export ACR_NAME="acrtest$RANDOM"
 location="eastus2"
 sku="Basic"
 
@@ -15,5 +15,3 @@ az acr create \
     --sku $sku \
     --admin-enabled true
 
-export RG_NAME
-export ACR_NAME
