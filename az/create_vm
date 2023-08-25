@@ -1,9 +1,0 @@
-#!/bin/bash
-
-export RG_NAME="rg-vm-tst"
-export VM_NAME="vm-test"
-location="eastus2"
-
-az group create \
-    --resource-group $RG_NAME \
-    --location $location
