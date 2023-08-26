@@ -1,0 +1,8 @@
+#cloud-config
+
+package_upgrade: true
+packages:
+  - nginx
+
+runcmd:
+  - echo "<h1>Hello from $(uname -n) VM </h1>" | tee /var/www/html/index.html
