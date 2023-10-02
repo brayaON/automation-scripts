@@ -21,7 +21,7 @@ RL_NAME="AllowHttpTrafficFromClient"
 LB_FE="public-frontend"
 LB_BE="vmss-backend-pool"
 LB_PROBE="http-probe"
-init_path="$HOME/azure/az-scripts/init-scripts/cloud-init.yaml"
+init_path="$HOME/azure/az-scripts/init/cloud-init.yaml"
 
 az group create \
     --resource-group $RG_NAME \

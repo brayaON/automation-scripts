@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# This script deploys these resources:
+# 	- 2 VNETs on East US region and 1 VNET on Central US.
+# 	- 3 Subnets. Each VNET has one subnet, e.g., sb1-vnet1 is on vnet1
+# 	- 3 Linux VMs. VM1 is on VNET1, VM2 is on VNET2, and so on...
+# 	- 4 VNET Peerings. VNET1 <-> VNET2, VNET2 <-> VNET3
+
+RG_NAME="rg-vnet-test"
+vnets=("vnet1-test" "vnet2-test" "vnet3-test")
+sbs=("sb-vnet1" "sb-vnet2" "sb-vnet3")
+peers=("peer-v1v2" "peer-v2v1" "peer-v2v3" "peer-v3v2")
+
+az group create \
+    --resource-group $RG_NAME \
+    --location eastus
+
+# VNETs
+az network vnet create \
+    --name ${vnets[0]} \
+    --resource-group $RG_NAME \
+    --address-prefixes 10.1.0.0/16 \
+    --subnet-name ${sbs[0]} \
+    --subnet-prefixes 10.1.1.0/24
+
+az network vnet create \
+    --name ${vnets[1]} \
+    --resource-group $RG_NAME \
+    --address-prefixes 10.2.0.0/16 \
+    --subnet-name ${sbs[1]} \
+    --subnet-prefixes 10.2.1.0/24
+
+az network vnet create \
+    --name ${vnets[2]} \
+    --resource-group $RG_NAME \
+    --address-prefixes 10.3.0.0/16 \
+    --subnet-name ${sbs[2]} \
+    --subnet-prefixes 10.3.1.0/24 \
+    --location centralus
+
+# VNET Peerings
+az network vnet peering create \
+    --name "${peers[0]}" \
+    --resource-group $RG_NAME \
+    --vnet-name "${vnets[0]}" \
+    --remote-vnet "${vnets[1]}" \
+    --allow-vnet-access
+
+az network vnet peering create \
+    --name "${peers[1]}" \
+    --resource-group $RG_NAME \
+    --vnet-name "${vnets[1]}" \
+    --remote-vnet "${vnets[0]}" \
+    --allow-vnet-access
+
+az network vnet peering create \
+    --name "${peers[2]}" \
+    --resource-group $RG_NAME \
+    --vnet-name "${vnets[1]}" \
+    --remote-vnet "${vnets[2]}" \
+    --allow-vnet-access
+
+az network vnet peering create \
+    --name "${peers[3]}" \
+    --resource-group $RG_NAME \
+    --vnet-name "${vnets[2]}" \
+    --remote-vnet "${vnets[1]}" \
+    --allow-vnet-access

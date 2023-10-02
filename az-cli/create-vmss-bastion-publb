@@ -56,7 +56,7 @@ az network vnet subnet create \
     --resource-group $RG_NAME \
     --name $SB_BASTION \
     --vnet-name $VNET_NAME \
-    --address-prefixes 10.1.1.0/24 \
+    --address-prefixes 10.1.1.0/27 \
 
 az network vnet subnet create \
     --resource-group $RG_NAME \
